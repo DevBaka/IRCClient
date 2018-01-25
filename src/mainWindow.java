@@ -13,8 +13,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public class mainWindow2 extends JFrame {
-    public mainWindow2() {
+public class mainWindow extends JFrame {
+    public mainWindow() {
         	super("IRC-Client");
 		this.setSize(800,600);
 		this.setLocation(50, 50);
