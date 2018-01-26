@@ -15,13 +15,17 @@ import javax.swing.border.LineBorder;
 
 public class mainWindow extends JFrame {
     public mainWindow() {
+                // JFrame / Root Frame
         	super("IRC-Client");
 		this.setSize(800,600);
 		this.setLocation(50, 50);
-		this.setResizable(false);
+		this.setResizable(true);		
+		this.setLayout(new BorderLayout());
+                
+                // Um alle Prozesse nach dem schließen der GUI zu beenden.
+                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		
-		this.setLayout(null);
-		
+                // Menübar
 		Border bo = new LineBorder(Color.yellow);
 		JMenuBar navbar = new JMenuBar();
 		navbar.setBorder(bo);
@@ -34,6 +38,16 @@ public class mainWindow extends JFrame {
 		
 		navbar.add(mServer);
 		this.setJMenuBar(navbar);
+                
+                
+                // Server 6 Channel Liste
+                JPanel panelServers = new JPanel();
+                panelServers.setBackground(Color.red);
+                panelServers.setSize(20,20);
+                
+                // Add elements to JFrame / Root Frame
+                getContentPane().add(panelServers, BorderLayout.WEST);
+                
 		this.setVisible(true);
     }
     

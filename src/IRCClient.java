@@ -9,5 +9,9 @@
  * @author devbaka
  */
 public class IRCClient {
+    public static void main(String[] args)
+    {
+        mainWindow mainWindow = new mainWindow();
+    }
     
 }
