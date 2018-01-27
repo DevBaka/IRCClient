@@ -60,14 +60,28 @@ public class mainWindow extends JFrame {
                 JPanel panelUsers = new JPanel();
                 panelUsers.setBackground(Color.red);
                 JTextArea displayUsers = new JTextArea(33,15);
+                // min hight für dynamisches layout:
+                //JTextArea displayUsers = new JTextArea();
+                //displayUsers.setPreferredSize(new Dimension(33, 105));
                 displayUsers.setEditable(false);
                 JScrollPane scrollUsers = new JScrollPane(displayUsers);
                 scrollUsers.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
                 panelUsers.add(displayUsers);
                 
+                // Text box & Eingabe / Center / content
+                JPanel panelText = new JPanel();
+                panelText.setBackground(Color.blue);
+                JTextArea displayText = new JTextArea(28,37);
+                displayText.setEditable(false);
+                JScrollPane scrollText = new JScrollPane(displayText);
+                scrollText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+                panelText.add(displayText);
+                
+                
                 // Add elements to JFrame / Root Frame
                 getContentPane().add(panelServers, BorderLayout.WEST);
                 getContentPane().add(panelUsers, BorderLayout.EAST);
+                getContentPane().add(panelText, BorderLayout.CENTER);
                 //pack();
                 setLocationRelativeTo(null);
 		this.setVisible(true);
