@@ -2,7 +2,9 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+
+
+*/
 
 /**
  *
@@ -41,13 +43,33 @@ public class mainWindow extends JFrame {
                 
                 
                 // Server 6 Channel Liste
+                // add Panel
                 JPanel panelServers = new JPanel();
                 panelServers.setBackground(Color.red);
-                panelServers.setSize(20,20);
+                // add TextArea
+                JTextArea displayServers = new JTextArea(33,15);
+                displayServers.setEditable(false);
+                // add ScrollPane to TextArea
+                JScrollPane scrollServers = new JScrollPane(displayServers); 
+                scrollServers.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+                //scrollServers.setBounds(10, 11, 455, 249);
+                // add TextArea to panelServers
+                panelServers.add(displayServers);
+                
+                // Users Liste
+                JPanel panelUsers = new JPanel();
+                panelUsers.setBackground(Color.red);
+                JTextArea displayUsers = new JTextArea(33,15);
+                displayUsers.setEditable(false);
+                JScrollPane scrollUsers = new JScrollPane(displayUsers);
+                scrollUsers.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+                panelUsers.add(displayUsers);
                 
                 // Add elements to JFrame / Root Frame
                 getContentPane().add(panelServers, BorderLayout.WEST);
-                
+                getContentPane().add(panelUsers, BorderLayout.EAST);
+                //pack();
+                setLocationRelativeTo(null);
 		this.setVisible(true);
     }
     
