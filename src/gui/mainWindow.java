@@ -25,6 +25,7 @@ public class mainWindow extends JFrame implements ActionListener{
     
     private JTextField inputText;
     private JTextArea displayServers;
+    private JButton cmdSendMessage;
     
     public mainWindow() {
                 // JFrame / Root Frame
@@ -80,6 +81,8 @@ public class mainWindow extends JFrame implements ActionListener{
                 
                 // Text box & Eingabe / Center / content
                 JPanel panelText = new JPanel();
+                JPanel panelSendMessage = new JPanel(new FlowLayout());
+                panelText.setLayout(new BorderLayout());
                 panelText.setBackground(Color.blue);
                 JTextArea displayText = new JTextArea(28,37);
                 displayText.setEditable(false);
@@ -87,10 +90,14 @@ public class mainWindow extends JFrame implements ActionListener{
                 scrollText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
                 JTextField inputText = new JTextField(20);
                 inputText.addActionListener(this);
+                JButton cmdSendMessage = new JButton("Send");
                 
-                
-                panelText.add(displayText);
-                panelText.add(inputText);
+                panelSendMessage.add(inputText);
+                panelSendMessage.add(cmdSendMessage);
+                panelText.add(displayText, BorderLayout.CENTER);
+                panelText.add(panelSendMessage, BorderLayout.SOUTH);
+                //panelText.add(inputText, BorderLayout.SOUTH);
+                //panelText.add(cmdSendMessage, BorderLayout.SOUTH);
                 
                 
                 // Add elements to JFrame / Root Frame
@@ -106,6 +113,7 @@ public class mainWindow extends JFrame implements ActionListener{
         if(ae.getSource() == this.inputText){
             String text =  this.inputText.getText();
         }
+        
         
     }
     
