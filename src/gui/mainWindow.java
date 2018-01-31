@@ -13,6 +13,7 @@ package gui;
  * @author devbaka
  */
 //import gui.actionListender;
+import com.sun.media.sound.JARSoundbankReader;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -26,6 +27,8 @@ public class mainWindow extends JFrame implements ActionListener{
     private JTextField inputText;
     private JTextArea displayServers;
     private JButton cmdSendMessage;
+    private JMenuItem joinServer;
+    private JMenuItem NetzwerkListe;
     
     public mainWindow() {
                 // JFrame / Root Frame
@@ -43,13 +46,21 @@ public class mainWindow extends JFrame implements ActionListener{
 		JMenuBar navbar = new JMenuBar();
 		navbar.setBorder(bo);
 		
+                JMenu mNetzwerk = new JMenu("Netzwerk");
 		JMenu mServer = new JMenu("Server");
 		
+                JMenuItem NetzwerkListe = new JMenuItem("Netzwerkliste");
+                mNetzwerk.add(NetzwerkListe);
+                
+                
 		JMenuItem joinServer = new JMenuItem("Join Server");
-		JMenuItem NetzwerkListe = new JMenuItem("Join Server");
+                joinServer.addActionListener(this);
+		
+                
 		mServer.add(joinServer);
 		
 		navbar.add(mServer);
+                navbar.add(mNetzwerk);
 		this.setJMenuBar(navbar);
                 
                 
@@ -112,6 +123,10 @@ public class mainWindow extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == this.inputText){
             String text =  this.inputText.getText();
+        }
+        else if(ae.getSource() == this.cmdSendMessage){
+            gui.joinServer ServerDialog = new gui.joinServer();
+            
         }
         
         

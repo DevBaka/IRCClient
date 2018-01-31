@@ -15,6 +15,7 @@ public class IRCClient {
     {
         //mainWindow mainWindow = new mainWindow();
         gui.mainWindow mainWindow = new gui.mainWindow();
+        //gui.joinServer server = new gui.joinServer();
     }
     
 }
