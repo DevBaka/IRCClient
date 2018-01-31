@@ -1,3 +1,5 @@
+package gui;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,12 +12,20 @@
  *
  * @author devbaka
  */
+//import gui.actionListender;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public class mainWindow extends JFrame {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class mainWindow extends JFrame implements ActionListener{
+    
+    private JTextField inputText;
+    private JTextArea displayServers;
+    
     public mainWindow() {
                 // JFrame / Root Frame
         	super("IRC-Client");
@@ -75,7 +85,12 @@ public class mainWindow extends JFrame {
                 displayText.setEditable(false);
                 JScrollPane scrollText = new JScrollPane(displayText);
                 scrollText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+                JTextField inputText = new JTextField(20);
+                inputText.addActionListener(this);
+                
+                
                 panelText.add(displayText);
+                panelText.add(inputText);
                 
                 
                 // Add elements to JFrame / Root Frame
@@ -85,6 +100,13 @@ public class mainWindow extends JFrame {
                 //pack();
                 setLocationRelativeTo(null);
 		this.setVisible(true);
+    }
+    
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource() == this.inputText){
+            String text =  this.inputText.getText();
+        }
+        
     }
     
 }
