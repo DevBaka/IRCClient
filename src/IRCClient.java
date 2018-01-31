@@ -8,10 +8,14 @@
  *
  * @author devbaka
  */
+
+
 public class IRCClient {
     public static void main(String[] args)
     {
-        mainWindow mainWindow = new mainWindow();
+        //mainWindow mainWindow = new mainWindow();
+        gui.mainWindow mainWindow = new gui.mainWindow();
+        //gui.joinServer server = new gui.joinServer();
     }
     
 }

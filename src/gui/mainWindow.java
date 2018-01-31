@@ -1,3 +1,5 @@
+package gui;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,12 +12,24 @@
  *
  * @author devbaka
  */
+//import gui.actionListender;
+import com.sun.media.sound.JARSoundbankReader;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public class mainWindow extends JFrame {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class mainWindow extends JFrame implements ActionListener{
+    
+    private JTextField inputText;
+    private JTextArea displayServers;
+    private JButton cmdSendMessage;
+    private JMenuItem joinServer;
+    private JMenuItem NetzwerkListe;
+    
     public mainWindow() {
                 // JFrame / Root Frame
         	super("IRC-Client");
@@ -32,13 +46,21 @@ public class mainWindow extends JFrame {
 		JMenuBar navbar = new JMenuBar();
 		navbar.setBorder(bo);
 		
+                JMenu mNetzwerk = new JMenu("Netzwerk");
 		JMenu mServer = new JMenu("Server");
 		
+                JMenuItem NetzwerkListe = new JMenuItem("Netzwerkliste");
+                mNetzwerk.add(NetzwerkListe);
+                
+                
 		JMenuItem joinServer = new JMenuItem("Join Server");
-		JMenuItem NetzwerkListe = new JMenuItem("Join Server");
+                joinServer.addActionListener(this);
+		
+                
 		mServer.add(joinServer);
 		
 		navbar.add(mServer);
+                navbar.add(mNetzwerk);
 		this.setJMenuBar(navbar);
                 
                 
@@ -70,12 +92,23 @@ public class mainWindow extends JFrame {
                 
                 // Text box & Eingabe / Center / content
                 JPanel panelText = new JPanel();
+                JPanel panelSendMessage = new JPanel(new FlowLayout());
+                panelText.setLayout(new BorderLayout());
                 panelText.setBackground(Color.blue);
                 JTextArea displayText = new JTextArea(28,37);
                 displayText.setEditable(false);
                 JScrollPane scrollText = new JScrollPane(displayText);
                 scrollText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-                panelText.add(displayText);
+                JTextField inputText = new JTextField(20);
+                inputText.addActionListener(this);
+                JButton cmdSendMessage = new JButton("Send");
+                
+                panelSendMessage.add(inputText);
+                panelSendMessage.add(cmdSendMessage);
+                panelText.add(displayText, BorderLayout.CENTER);
+                panelText.add(panelSendMessage, BorderLayout.SOUTH);
+                //panelText.add(inputText, BorderLayout.SOUTH);
+                //panelText.add(cmdSendMessage, BorderLayout.SOUTH);
                 
                 
                 // Add elements to JFrame / Root Frame
@@ -85,6 +118,18 @@ public class mainWindow extends JFrame {
                 //pack();
                 setLocationRelativeTo(null);
 		this.setVisible(true);
+    }
+    
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource() == this.inputText){
+            String text =  this.inputText.getText();
+        }
+        else if(ae.getSource() == this.cmdSendMessage){
+            gui.joinServer ServerDialog = new gui.joinServer();
+            
+        }
+        
+        
     }
     
 }
