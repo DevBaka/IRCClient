@@ -18,7 +18,7 @@ public class joinServer {
         JDialog joinServer = new JDialog();
         joinServer.setTitle("Join Server");
         joinServer.setSize(200,400);
-        
+        joinServer.setModal(true);
         joinServer.setVisible(true);
         
     }
