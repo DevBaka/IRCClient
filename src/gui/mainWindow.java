@@ -101,7 +101,8 @@ public class mainWindow extends JFrame implements ActionListener{
                 scrollText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
                 JTextField inputText = new JTextField(20);
                 inputText.addActionListener(this);
-                JButton cmdSendMessage = new JButton("Send");
+                cmdSendMessage = new JButton("Send");
+                cmdSendMessage.addActionListener(this);
                 
                 panelSendMessage.add(inputText);
                 panelSendMessage.add(cmdSendMessage);
@@ -126,7 +127,7 @@ public class mainWindow extends JFrame implements ActionListener{
         }
         else if(ae.getSource() == this.cmdSendMessage){
             gui.joinServer ServerDialog = new gui.joinServer();
-            
+            System.out.println("sendmsg");
         }
         
         
