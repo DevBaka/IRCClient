@@ -9,17 +9,29 @@ package gui;
  *
  * @author devbaka
  */
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
-public class joinServer {
-    /*
-    funktioniert nicht so ganz richtig bzw es wird ein neues Programm initialisiert wodurch ein komplett neuer Frame gestartet wird.
-    */
+public class joinServer implements ActionListener{
+    private JButton cmdTestconnect;
+    
     public joinServer(){
         JDialog joinServer = new JDialog();
         joinServer.setTitle("Join Server");
         joinServer.setSize(200,400);
+        joinServer.setLocation(250, 250);
         joinServer.setModal(true);
         joinServer.setVisible(true);
         
+        cmdTestconnect = new JButton("Test");
+        cmdTestconnect.addActionListener(this);
+        joinServer.add(cmdTestconnect);
+        
     }
+    
+     public void actionPerformed(ActionEvent ae){
+        if(ae.getSource() == this.cmdTestconnect){
+            String text = "";
+        }
+     }
 }

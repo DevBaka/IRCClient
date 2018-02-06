@@ -53,7 +53,7 @@ public class mainWindow extends JFrame implements ActionListener{
                 mNetzwerk.add(NetzwerkListe);
                 
                 
-		JMenuItem joinServer = new JMenuItem("Join Server");
+		joinServer = new JMenuItem("Join Server");
                 joinServer.addActionListener(this);
 		
                 
@@ -125,7 +125,7 @@ public class mainWindow extends JFrame implements ActionListener{
         if(ae.getSource() == this.inputText){
             String text =  this.inputText.getText();
         }
-        else if(ae.getSource() == this.cmdSendMessage){
+        else if(ae.getSource() == this.joinServer){
             gui.joinServer ServerDialog = new gui.joinServer();
             System.out.println("sendmsg");
         }
