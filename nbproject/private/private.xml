@@ -3,9 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/SickzZ/Documents/GitHub/IRCClient/src/IRCClient.java</file>
             <file>file:/C:/Users/SickzZ/Documents/GitHub/IRCClient/src/gui/mainWindow.java</file>
             <file>file:/C:/Users/SickzZ/Documents/GitHub/IRCClient/src/gui/joinServer.java</file>
+=======
+            <file>file:/home/devbaka/NetBeansProjects/IRC/src/IRCClient.java</file>
+            <file>file:/home/devbaka/NetBeansProjects/IRC/src/gui/mainWindow.java</file>
+            <file>file:/home/devbaka/NetBeansProjects/IRC/src/gui/joinServer.java</file>
+>>>>>>> 9077e6b7bd2fbef22f2c39469ec8f4f86c3b96aa
         </group>
     </open-files>
 </project-private>
