@@ -25,11 +25,13 @@ public class joinServer implements ActionListener{
         joinServer.setSize(200,400);
         joinServer.setLocation(250, 250);
         joinServer.setModal(true);
-        joinServer.setVisible(true);
+        
         
         cmdTestconnect = new JButton("Test");
         cmdTestconnect.addActionListener(this);
         joinServer.add(cmdTestconnect);
+        joinServer.pack();
+        joinServer.setVisible(true);
         
     }
     
