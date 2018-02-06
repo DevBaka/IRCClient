@@ -13,7 +13,7 @@ package gui;
  * @author devbaka
  */
 //import gui.actionListender;
-//import com.sun.media.sound.JARSoundbankReader;
+import com.sun.media.sound.JARSoundbankReader;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -26,10 +26,9 @@ public class mainWindow extends JFrame implements ActionListener{
     
     private JTextField inputText;
     private JTextArea displayServers;
-    JButton cmdSendMessage;
+    private JButton cmdSendMessage;
     private JMenuItem joinServer;
     private JMenuItem NetzwerkListe;
-    private JFrame frame;
     
     public mainWindow() {
                 // JFrame / Root Frame
@@ -37,9 +36,7 @@ public class mainWindow extends JFrame implements ActionListener{
 		this.setSize(800,600);
 		this.setLocation(50, 50);
 		this.setResizable(true);		
-		//this.setLayout(new BorderLayout());
-                
-                
+		this.setLayout(new BorderLayout());
                 
                 // Um alle Prozesse nach dem schließen der GUI zu beenden.
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,8 +78,6 @@ public class mainWindow extends JFrame implements ActionListener{
                 // add TextArea to panelServers
                 panelServers.add(displayServers);
                 
-                
-                
                 // Users Liste
                 JPanel panelUsers = new JPanel();
                 panelUsers.setBackground(Color.red);
@@ -106,11 +101,7 @@ public class mainWindow extends JFrame implements ActionListener{
                 scrollText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
                 JTextField inputText = new JTextField(20);
                 inputText.addActionListener(this);
-<<<<<<< HEAD
-                JButton cmdSendMessage = new JButton("Send");
-=======
                 cmdSendMessage = new JButton("Send");
->>>>>>> 9077e6b7bd2fbef22f2c39469ec8f4f86c3b96aa
                 cmdSendMessage.addActionListener(this);
                 
                 panelSendMessage.add(inputText);
@@ -128,30 +119,15 @@ public class mainWindow extends JFrame implements ActionListener{
                 //pack();
                 setLocationRelativeTo(null);
 		this.setVisible(true);
-                System.out.println("init");
-
     }
+    
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == this.inputText){
             String text =  this.inputText.getText();
         }
         else if(ae.getSource() == this.cmdSendMessage){
-<<<<<<< HEAD
-            System.out.println("cmd sendmsg");
-            joinServer ServerDialog = new joinServer();
-            /*JFrame frame = new JFrame();
-                frame.setTitle("baka");
-                frame.setSize(800,600);
-                frame.setResizable(true);
-                frame.setLayout(new BorderLayout());
-                frame.setBackground(Color.yellow);
-                frame.setVisible(true);
-        */
-            
-=======
             gui.joinServer ServerDialog = new gui.joinServer();
             System.out.println("sendmsg");
->>>>>>> 9077e6b7bd2fbef22f2c39469ec8f4f86c3b96aa
         }
         
         
