@@ -10,13 +10,15 @@ package gui;
  * @author devbaka
  */
 import javax.swing.*;
-public class joinServer {
+public class joinServer extends mainWindow{
     
     public joinServer(){
-        JFrame joinServer = new JFrame();
+        JDialog joinServer = new JDialog();
         joinServer.setTitle("Join Server");
         joinServer.setSize(200,400);
         
         joinServer.setVisible(true);
+        //window.setContentPane(joinServer);
+        
     }
 }

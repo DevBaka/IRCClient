@@ -13,7 +13,7 @@ package gui;
  * @author devbaka
  */
 //import gui.actionListender;
-import com.sun.media.sound.JARSoundbankReader;
+//import com.sun.media.sound.JARSoundbankReader;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -26,9 +26,10 @@ public class mainWindow extends JFrame implements ActionListener{
     
     private JTextField inputText;
     private JTextArea displayServers;
-    private JButton cmdSendMessage;
+    JButton cmdSendMessage;
     private JMenuItem joinServer;
     private JMenuItem NetzwerkListe;
+    private JFrame frame;
     
     public mainWindow() {
                 // JFrame / Root Frame
@@ -36,7 +37,9 @@ public class mainWindow extends JFrame implements ActionListener{
 		this.setSize(800,600);
 		this.setLocation(50, 50);
 		this.setResizable(true);		
-		this.setLayout(new BorderLayout());
+		//this.setLayout(new BorderLayout());
+                
+                
                 
                 // Um alle Prozesse nach dem schließen der GUI zu beenden.
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,6 +81,8 @@ public class mainWindow extends JFrame implements ActionListener{
                 // add TextArea to panelServers
                 panelServers.add(displayServers);
                 
+                
+                
                 // Users Liste
                 JPanel panelUsers = new JPanel();
                 panelUsers.setBackground(Color.red);
@@ -102,6 +107,7 @@ public class mainWindow extends JFrame implements ActionListener{
                 JTextField inputText = new JTextField(20);
                 inputText.addActionListener(this);
                 JButton cmdSendMessage = new JButton("Send");
+                cmdSendMessage.addActionListener(this);
                 
                 panelSendMessage.add(inputText);
                 panelSendMessage.add(cmdSendMessage);
@@ -118,14 +124,24 @@ public class mainWindow extends JFrame implements ActionListener{
                 //pack();
                 setLocationRelativeTo(null);
 		this.setVisible(true);
+                System.out.println("init");
+
     }
-    
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == this.inputText){
             String text =  this.inputText.getText();
         }
         else if(ae.getSource() == this.cmdSendMessage){
-            gui.joinServer ServerDialog = new gui.joinServer();
+            System.out.println("cmd sendmsg");
+            joinServer ServerDialog = new joinServer();
+            /*JFrame frame = new JFrame();
+                frame.setTitle("baka");
+                frame.setSize(800,600);
+                frame.setResizable(true);
+                frame.setLayout(new BorderLayout());
+                frame.setBackground(Color.yellow);
+                frame.setVisible(true);
+        */
             
         }
         
