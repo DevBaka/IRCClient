@@ -9,9 +9,13 @@ package gui;
  *
  * @author devbaka
  */
+
+import irc.ircFunctions;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.*;
+import irc.ircFunctions;
 public class joinServer implements ActionListener{
     private JButton cmdTestconnect;
     
@@ -32,6 +36,7 @@ public class joinServer implements ActionListener{
      public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == this.cmdTestconnect){
             String text = "";
+            //ircFunctions();
         }
      }
 }
