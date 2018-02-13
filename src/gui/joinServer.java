@@ -38,7 +38,14 @@ public class joinServer implements ActionListener{
      public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == this.cmdTestconnect){
             String text = "";
-            //ircFunctions();
+            try{
+                ircFunctions irc = new irc.ircFunctions();
+                //irc.irc_conn();
+
+            }
+            catch(IOException e){
+                System.out.println("errorirc: " + e);
+            }
         }
      }
 }

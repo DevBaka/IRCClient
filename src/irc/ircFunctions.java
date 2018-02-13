@@ -38,8 +38,9 @@ public class ircFunctions {
     String line;
     
     public ircFunctions()throws IOException{
-          String username = "bakaBot";
-        String servername = "devbaka.ddns.net";
+        System.out.println("irc open");
+        String username = "bakaBot";
+        String servername = "irc.freenode.net";
         String channel = "#baka";
         int port = 6667;
         this.set_Data(servername, port, username);
@@ -47,14 +48,17 @@ public class ircFunctions {
         this.login(username);
         
         while((this.line = this.reader.readLine()) != null){
-            if (this.line.indexOf("004") >= 0) {
+            System.out.println("lineUsername: 004: \n" + this.line.indexOf("004") + "line 433: \n" + this.line.indexOf("433"));
+
+            /*if (this.line.indexOf("004") >= 0) {
                 System.out.println("Nickname is not in use.");
                 break;
             }
             else if (this.line.indexOf("433") >= 0) {
                 System.out.println("Nickname is already in use.");
-                return;
-            }
+                break;
+                //return;
+            }*/
         }
         this.join("#baka");
         while ((line = reader.readLine( )) != null) {
@@ -66,12 +70,27 @@ public class ircFunctions {
             }
             else {
                 // Print the raw line received by the bot.
-                System.out.println(line);
+                System.out.println("line: " + line);
             }
         }
     }
     
+    public void read_data()throws IOException{
+            while ((line = reader.readLine( )) != null) {
+            if (line.toLowerCase( ).startsWith("PING ")) {
+                // We must respond to PINGs to avoid being disconnected.
+                writer.write("PONG " + line.substring(5) + "\r\n");
+                writer.write("PRIVMSG " + this.Channel + " :I got pinged!\r\n");
+                writer.flush( );
+            }
+            else {
+                // Print the raw line received by the bot.
+                System.out.println("line: " + line);
+            }
+        }
+    }
     public void irc_conn() throws IOException{
+        System.out.println("Server: " + this.Server);
         this.ircSocket = new Socket(this.Server, this.Port);
         this.writer = new BufferedWriter(new OutputStreamWriter(this.ircSocket.getOutputStream()));
         this.reader = new BufferedReader(new InputStreamReader(this.ircSocket.getInputStream()));
@@ -82,32 +101,38 @@ public class ircFunctions {
         //PrintWriter out = new PrintWriter(outstream);
         //String sendData = command;
         //out.print(sendData);
-        this.writer.write(command);
+        System.out.println("send: " + command);
+        this.writer.write(command +"\n");
         this.writer.flush();
         
     }
     
     public void join(String channelName)throws IOException{
+        System.out.println("Join: " + channelName);
         this.send_data(String.format("JOIN %s", channelName));
     }
     
     public void login(String nickname, String username, String hostname, String realname)throws IOException{
+        System.out.println("login");
         String msg = String.format("USER %s %s %s %s", username,hostname, this.Server, realname);
         this.send_data(msg);
         this.send_data("NICK " + nickname);
     }
     public void login(String nickname)throws IOException{
+        System.out.println("login");
+
         String msg = String.format("USER %s %s %s %s", nickname,nickname, this.Server, nickname);
         this.send_data(msg);
         this.send_data("NICK " + nickname);
     }
     public void set_Data(String Host, int Port, String nickname ){
+        System.out.println("setdata");
         this.Server = Host;
         this.Port = Port;
         this.Nickname = nickname;
     }
     public void testConnect()throws IOException{
-        String username = "bakaBot";
+        String username = "bakaBot3";
         String servername = "devbaka.ddns.net";
         String channel = "#baka";
         int port = 6667;
@@ -116,6 +141,7 @@ public class ircFunctions {
         this.login(username);
         
         while((this.line = this.reader.readLine()) != null){
+            System.out.println("lineUsername: 004: \n" + this.line.indexOf("004") + "line 433: \n" + this.line.indexOf("433"));
             if (this.line.indexOf("004") >= 0) {
                 System.out.println("Nickname is not in use.");
                 break;
