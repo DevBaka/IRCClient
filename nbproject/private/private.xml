@@ -5,6 +5,7 @@
         <group>
             <file>file:/home/devbaka/NetBeansProjects/IRC/src/IRCClient.java</file>
             <file>file:/home/devbaka/NetBeansProjects/IRC/src/gui/mainWindow.java</file>
+            <file>file:/home/devbaka/NetBeansProjects/IRC/src/irc/ircFunctions.java</file>
             <file>file:/home/devbaka/NetBeansProjects/IRC/src/gui/joinServer.java</file>
         </group>
     </open-files>

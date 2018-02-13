@@ -39,7 +39,7 @@ public class ircFunctions {
     
     public ircFunctions()throws IOException{
         System.out.println("irc open");
-        String username = "bakaBot";
+        String username = "bakaBot7777";
         String servername = "irc.freenode.net";
         String channel = "#baka";
         int port = 6667;
@@ -48,8 +48,8 @@ public class ircFunctions {
         this.login(username);
         
         while((this.line = this.reader.readLine()) != null){
-            System.out.println("lineUsername: 004: \n" + this.line.indexOf("004") + "line 433: \n" + this.line.indexOf("433"));
-
+           // System.out.println("lineUsername: 004: \n" + this.line.indexOf("004") + "line 433: \n" + this.line.indexOf("433"));
+           System.out.println("line: " + this.line);
             /*if (this.line.indexOf("004") >= 0) {
                 System.out.println("Nickname is not in use.");
                 break;
@@ -62,6 +62,9 @@ public class ircFunctions {
         }
         this.join("#baka");
         while ((line = reader.readLine( )) != null) {
+                       
+          System.out.println("line2: " + this.line);
+
             if (line.toLowerCase( ).startsWith("PING ")) {
                 // We must respond to PINGs to avoid being disconnected.
                 writer.write("PONG " + line.substring(5) + "\r\n");
