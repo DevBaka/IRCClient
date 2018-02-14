@@ -29,6 +29,7 @@ public class mainWindow extends JFrame implements ActionListener{
     private JButton cmdSendMessage;
     private JMenuItem joinServer;
     private JMenuItem NetzwerkListe;
+    private JTextArea displayText;
     
     public mainWindow() {
                 // JFrame / Root Frame
@@ -95,7 +96,7 @@ public class mainWindow extends JFrame implements ActionListener{
                 JPanel panelSendMessage = new JPanel(new FlowLayout());
                 panelText.setLayout(new BorderLayout());
                 panelText.setBackground(Color.blue);
-                JTextArea displayText = new JTextArea(28,37);
+                displayText = new JTextArea(28,37);
                 displayText.setEditable(false);
                 JScrollPane scrollText = new JScrollPane(displayText);
                 scrollText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -131,6 +132,10 @@ public class mainWindow extends JFrame implements ActionListener{
         }
         
         
+    }
+    
+    public void addText(String text){
+        this.displayText.append(text);
     }
     
 }
