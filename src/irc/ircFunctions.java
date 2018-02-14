@@ -50,6 +50,9 @@ public class ircFunctions {
         while((this.line = this.reader.readLine()) != null){
            // System.out.println("lineUsername: 004: \n" + this.line.indexOf("004") + "line 433: \n" + this.line.indexOf("433"));
            System.out.println("line: " + this.line);
+           if(this.line.contains("End of /MOTD")){
+               this.join("#baka");
+           }
             /*if (this.line.indexOf("004") >= 0) {
                 System.out.println("Nickname is not in use.");
                 break;
@@ -161,6 +164,9 @@ public class ircFunctions {
                 writer.write("PONG " + line.substring(5) + "\r\n");
                 writer.write("PRIVMSG " + channel + " :I got pinged!\r\n");
                 writer.flush( );
+            }
+            else if(line.contains("/MOTD")){
+                
             }
             else {
                 // Print the raw line received by the bot.
