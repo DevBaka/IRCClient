@@ -28,7 +28,9 @@ public class mainWindow extends JFrame implements ActionListener{
     private JTextArea displayServers;
     private JButton cmdSendMessage;
     private JMenuItem joinServer;
+    private JMenuItem joinChannel;
     private JMenuItem NetzwerkListe;
+    private JTextArea displayText;
     
     public mainWindow() {
                 // JFrame / Root Frame
@@ -55,9 +57,13 @@ public class mainWindow extends JFrame implements ActionListener{
                 
 		joinServer = new JMenuItem("Join Server");
                 joinServer.addActionListener(this);
-		
+                
+                
+		joinChannel = new JMenuItem("Join Channel");
+                joinChannel.addActionListener(this);
                 
 		mServer.add(joinServer);
+                mServer.add(joinChannel);
 		
 		navbar.add(mServer);
                 navbar.add(mNetzwerk);
@@ -95,7 +101,7 @@ public class mainWindow extends JFrame implements ActionListener{
                 JPanel panelSendMessage = new JPanel(new FlowLayout());
                 panelText.setLayout(new BorderLayout());
                 panelText.setBackground(Color.blue);
-                JTextArea displayText = new JTextArea(28,37);
+                displayText = new JTextArea(28,37);
                 displayText.setEditable(false);
                 JScrollPane scrollText = new JScrollPane(displayText);
                 scrollText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -129,8 +135,16 @@ public class mainWindow extends JFrame implements ActionListener{
             gui.joinServer ServerDialog = new gui.joinServer();
             System.out.println("sendmsg");
         }
+        else if(ae.getSource() == this.joinChannel){
+            gui.joinChannel ChannelDialog = new gui.joinChannel();
+            
+        }
         
         
+    }
+    
+    public void addText(String text){
+        this.displayText.append(text);
     }
     
 }
