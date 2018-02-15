@@ -28,6 +28,7 @@ public class mainWindow extends JFrame implements ActionListener{
     private JTextArea displayServers;
     private JButton cmdSendMessage;
     private JMenuItem joinServer;
+    private JMenuItem joinChannel;
     private JMenuItem NetzwerkListe;
     private JTextArea displayText;
     
@@ -56,9 +57,13 @@ public class mainWindow extends JFrame implements ActionListener{
                 
 		joinServer = new JMenuItem("Join Server");
                 joinServer.addActionListener(this);
-		
+                
+                
+		joinChannel = new JMenuItem("Join Channel");
+                joinChannel.addActionListener(this);
                 
 		mServer.add(joinServer);
+                mServer.add(joinChannel);
 		
 		navbar.add(mServer);
                 navbar.add(mNetzwerk);
@@ -129,6 +134,10 @@ public class mainWindow extends JFrame implements ActionListener{
         else if(ae.getSource() == this.joinServer){
             gui.joinServer ServerDialog = new gui.joinServer();
             System.out.println("sendmsg");
+        }
+        else if(ae.getSource() == this.joinChannel){
+            gui.joinChannel ChannelDialog = new gui.joinChannel();
+            
         }
         
         

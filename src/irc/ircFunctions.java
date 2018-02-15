@@ -13,6 +13,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  *
@@ -39,6 +41,11 @@ public class ircFunctions implements Runnable{
    
     private Thread t;
     private String threadName;
+    
+    private int channelNumbers;
+    private String newChannel = null;
+    
+    final BlockingQueue<String> queChannel = new LinkedBlockingQueue<String>();
     
    /* public ircFunctions()throws IOException{
         System.out.println("irc open");
@@ -86,13 +93,13 @@ public class ircFunctions implements Runnable{
         }        
     }*/
    
-    public ircFunctions(String servers) throws IOException{
-        this.threadName = servers;
+    public ircFunctions(String ServerName, int ServerPort, String ChannelName, String Username) throws IOException{
+        this.threadName = ServerName;
         System.out.println("irc open");
-        String username = "devbaka223";
-        String servername = "irc.freenode.net";
-        String channel = "#baka";
-        int port = 6667;
+        String username = Username;
+        String servername = ServerName;
+        String channel = ChannelName;
+        int port = ServerPort;
         this.set_Data(servername, port, username, channel);
         this.irc_conn();
         this.login(username);
@@ -113,7 +120,7 @@ public class ircFunctions implements Runnable{
                 //return;
             }
         }
-        this.join("#baka");
+        this.join(channel);
     }
     
     public void run(){
@@ -134,6 +141,12 @@ public class ircFunctions implements Runnable{
                 // Print the raw line received by the bot.
                 System.out.println("line2any: " + line);
             }
+            
+            if(this.newChannel != null){
+                this.join(this.newChannel);
+                this.newChannel = null;
+            }
+            
         }
         }
         catch(IOException e ){

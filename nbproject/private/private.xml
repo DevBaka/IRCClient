@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/devbaka/NetBeansProjects/IRC/src/IRCClient.java</file>
-            <file>file:/home/devbaka/NetBeansProjects/IRC/src/gui/mainWindow.java</file>
-            <file>file:/home/devbaka/NetBeansProjects/IRC/src/irc/ircFunctions.java</file>
-            <file>file:/home/devbaka/NetBeansProjects/IRC/src/gui/joinServer.java</file>
+            <file>file:/C:/Users/devbaka/Documents/NetBeansProjects/IRCClient/src/IRCClient.java</file>
+            <file>file:/C:/Users/devbaka/Documents/NetBeansProjects/IRCClient/src/gui/mainWindow.java</file>
+            <file>file:/C:/Users/devbaka/Documents/NetBeansProjects/IRCClient/src/irc/ircFunctions.java</file>
+            <file>file:/C:/Users/devbaka/Documents/NetBeansProjects/IRCClient/src/gui/joinChannel.java</file>
+            <file>file:/C:/Users/devbaka/Documents/NetBeansProjects/IRCClient/src/gui/joinServer.java</file>
         </group>
     </open-files>
 </project-private>
