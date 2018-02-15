@@ -32,13 +32,13 @@ public class ircFunctions {
     String Nickname;
     String Channel;
     
-    Socket ircSocket;
+    Socket ircSocket = null;
     BufferedWriter writer;
     BufferedReader reader;
     String line;
     
     public ircFunctions()throws IOException{
-          String username = "bakaBot";
+        String username = "bakaTest";
         String servername = "devbaka.ddns.net";
         String channel = "#baka";
         int port = 6667;
@@ -71,19 +71,25 @@ public class ircFunctions {
         }
     }
     
-    public void irc_conn() throws IOException{
+    public void irc_conn()throws IOException{
         this.ircSocket = new Socket(this.Server, this.Port);
         this.writer = new BufferedWriter(new OutputStreamWriter(this.ircSocket.getOutputStream()));
         this.reader = new BufferedReader(new InputStreamReader(this.ircSocket.getInputStream()));
     }
     
-    public void send_data(String command) throws IOException {
+    public void send_data(String command)throws IOException{
         //OutputStream  outstream = this.ircSocket.getOutputStream();
         //PrintWriter out = new PrintWriter(outstream);
         //String sendData = command;
         //out.print(sendData);
+        if(command == null){
+            command = "";
+        }
+        else{
         this.writer.write(command);
         this.writer.flush();
+        }
+       
         
     }
     

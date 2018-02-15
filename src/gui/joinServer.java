@@ -29,6 +29,8 @@ public class joinServer implements ActionListener{
         
         cmdTestconnect = new JButton("Test");
         cmdTestconnect.addActionListener(this);
+        
+        
         joinServer.add(cmdTestconnect);
         joinServer.pack();
         joinServer.setVisible(true);
@@ -38,7 +40,7 @@ public class joinServer implements ActionListener{
      public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == this.cmdTestconnect){
             String text = "";
-            //ircFunctions();
+            //ircFunctions ircCmd = new ircFunctions();
         }
      }
 }
