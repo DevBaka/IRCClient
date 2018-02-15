@@ -25,7 +25,7 @@ import java.net.Socket;
                 new InputStreamReader(socket.getInputStream( )));
  * 
  */
-public class ircFunctions {
+public class ircFunctions implements Runnable{
     
     String Server;
     int Port;
@@ -36,8 +36,11 @@ public class ircFunctions {
     BufferedWriter writer;
     BufferedReader reader;
     String line;
+   
+    private Thread t;
+    private String threadName;
     
-    public ircFunctions()throws IOException{
+   /* public ircFunctions()throws IOException{
         System.out.println("irc open");
         String username = "devbaka223";
         String servername = "irc.freenode.net";
@@ -52,7 +55,7 @@ public class ircFunctions {
            System.out.println("line: " + this.line);
            /*if(this.line.contains("End of /MOTD")){
                this.join("#baka");
-           }*/
+           }*//*
             if (this.line.indexOf("004") >= 0) {
                 System.out.println("Nickname is not in use.");
                 break;
@@ -80,9 +83,70 @@ public class ircFunctions {
                 // Print the raw line received by the bot.
                 System.out.println("line2any: " + line);
             }
+        }        
+    }*/
+   
+    public ircFunctions(String servers) throws IOException{
+        this.threadName = servers;
+        System.out.println("irc open");
+        String username = "devbaka223";
+        String servername = "irc.freenode.net";
+        String channel = "#baka";
+        int port = 6667;
+        this.set_Data(servername, port, username, channel);
+        this.irc_conn();
+        this.login(username);
+        
+        while((this.line = this.reader.readLine()) != null){
+           // System.out.println("lineUsername: 004: \n" + this.line.indexOf("004") + "line 433: \n" + this.line.indexOf("433"));
+           System.out.println("line: " + this.line);
+           /*if(this.line.contains("End of /MOTD")){
+               this.join("#baka");
+           }*/
+            if (this.line.indexOf("004") >= 0) {
+                System.out.println("Nickname is not in use.");
+                break;
+            }
+            else if (this.line.indexOf("433") >= 0) {
+                System.out.println("Nickname is already in use.");
+                return;
+                //return;
+            }
         }
+        this.join("#baka");
     }
     
+    public void run(){
+        try{
+        while ((line = reader.readLine( )) != null) {
+                       
+          System.out.println("line2: " + this.line);
+
+            //if (line.startsWith("PING ")) {
+            if(line.contains("PING ") && !line.contains("PRIVMSG")){
+                // We must respond to PINGs to avoid being disconnected.
+                System.out.println("got pinged sub: " + line.substring(5));
+                writer.write("PONG " + line.substring(5) + "\r\n");
+                writer.write("PRIVMSG " + this.Channel + " :I got pinged!\r\n");
+                writer.flush( );
+            }
+            else {
+                // Print the raw line received by the bot.
+                System.out.println("line2any: " + line);
+            }
+        }
+        }
+        catch(IOException e ){
+            System.out.println("read error: " + e);
+        }
+    }
+    public void start(){
+        System.out.println("Start freenode thead");
+        if(t==null){
+            t = new Thread(this, threadName);
+            t.start();
+        }
+    }
     public String read_data()throws IOException{
             while ((line = reader.readLine( )) != null) {
                 if (line.toLowerCase( ).startsWith("PING ")) {

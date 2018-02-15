@@ -18,6 +18,7 @@ import javax.swing.*;
 import irc.ircFunctions;
 public class joinServer implements ActionListener{
     private JButton cmdTestconnect;
+    private Thread t;
     
     public joinServer(){
         JDialog joinServer = new JDialog();
@@ -39,7 +40,8 @@ public class joinServer implements ActionListener{
         if(ae.getSource() == this.cmdTestconnect){
             String text = "";
             try{
-                ircFunctions irc = new irc.ircFunctions();
+                ircFunctions irc = new irc.ircFunctions("freenode");
+                irc.start();
                 //irc.irc_conn();
 
             }
