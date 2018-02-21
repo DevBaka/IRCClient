@@ -22,6 +22,8 @@ import javax.swing.border.LineBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+
 public class mainWindow extends JFrame implements ActionListener{
     
     private JTextField inputText;
@@ -30,7 +32,7 @@ public class mainWindow extends JFrame implements ActionListener{
     private JMenuItem joinServer;
     private JMenuItem joinChannel;
     private JMenuItem NetzwerkListe;
-    private JTextArea displayText;
+    public JTextArea displayText;
     
     public mainWindow() {
                 // JFrame / Root Frame
@@ -103,6 +105,7 @@ public class mainWindow extends JFrame implements ActionListener{
                 panelText.setBackground(Color.blue);
                 displayText = new JTextArea(28,37);
                 displayText.setEditable(false);
+                
                 JScrollPane scrollText = new JScrollPane(displayText);
                 scrollText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
                 JTextField inputText = new JTextField(20);
@@ -112,7 +115,7 @@ public class mainWindow extends JFrame implements ActionListener{
                 
                 panelSendMessage.add(inputText);
                 panelSendMessage.add(cmdSendMessage);
-                panelText.add(displayText, BorderLayout.CENTER);
+                panelText.add(scrollText, BorderLayout.CENTER);
                 panelText.add(panelSendMessage, BorderLayout.SOUTH);
                 //panelText.add(inputText, BorderLayout.SOUTH);
                 //panelText.add(cmdSendMessage, BorderLayout.SOUTH);
@@ -143,8 +146,8 @@ public class mainWindow extends JFrame implements ActionListener{
         
     }
     
-    public void addText(String text){
-        this.displayText.append(text);
+    public static void addText(String text){
+        //this.displayText.append(text);
     }
     
 }
