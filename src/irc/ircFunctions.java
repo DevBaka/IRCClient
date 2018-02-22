@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.lang.reflect.Method;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -28,7 +29,7 @@ import java.util.concurrent.LinkedBlockingQueue;
                 new InputStreamReader(socket.getInputStream( )));
  * 
  */
-public class ircFunctions extends mainWindow implements Runnable{
+public final class ircFunctions implements Runnable{
     
     String Server;
     int Port;
@@ -43,10 +44,12 @@ public class ircFunctions extends mainWindow implements Runnable{
     private Thread t;
     private String threadName;
     
+    private mainWindow mW;
+    
     private int channelNumbers;
     private String newChannel = null;
     
-    final BlockingQueue<String> queChannel = new LinkedBlockingQueue<String>();
+    final BlockingQueue<String> queChannel;
     
    /* public ircFunctions()throws IOException{
         System.out.println("irc open");
@@ -94,7 +97,9 @@ public class ircFunctions extends mainWindow implements Runnable{
         }        
     }*/
    
-    public ircFunctions(String ServerName, int ServerPort, String ChannelName, String Username) throws IOException{
+    public ircFunctions(String ServerName, int ServerPort, String ChannelName, String Username, mainWindow window) throws IOException{
+        this.mW = window;
+        this.queChannel = new LinkedBlockingQueue<>();
         this.threadName = ServerName;
         System.out.println("irc open");
         String username = Username;
@@ -111,11 +116,11 @@ public class ircFunctions extends mainWindow implements Runnable{
            /*if(this.line.contains("End of /MOTD")){
                this.join("#baka");
            }*/
-            if (this.line.indexOf("004") >= 0) {
+            if (this.line.contains("004")) {
                 System.out.println("Nickname is not in use.");
                 break;
             }
-            else if (this.line.indexOf("433") >= 0) {
+            else if (this.line.contains("433")) {
                 System.out.println("Nickname is already in use.");
                 return;
                 //return;
@@ -124,6 +129,7 @@ public class ircFunctions extends mainWindow implements Runnable{
         this.join(channel);
     }
     
+    @Override
     public void run(){
         try{
         while ((line = reader.readLine( )) != null) {
@@ -143,7 +149,15 @@ public class ircFunctions extends mainWindow implements Runnable{
                 System.out.println("line2any: " + line);
                 //mainWindow.addText(line);
                 //super.displayText.setText(line);
-                super.displayText.append(line + "\n");
+                //super.displayText.append(line + "\n");
+                //Class<mainWindow> mW = mainWindow.class;
+                //mW.getMethod(line, parameterTypes)
+                //gui.mainWindow.class.getMethod
+                //Class<gui.mainWindow> mW;
+                //Class mW = gui.mainWindow.;
+                //mW.getMethod("addText", null);
+                this.mW.addText(line);
+                
                 
             }
             
@@ -197,6 +211,16 @@ public class ircFunctions extends mainWindow implements Runnable{
         this.writer.write(command +"\n");
         this.writer.flush();
         
+    }
+    
+    //Send Message
+    /*
+    Todo:
+    max lengh or splitting in mehrere Strings/messages mit irc max lengh
+    */
+    public void send_message(String message)throws IOException{
+        writer.write("PRIVMSG " + this.Channel + " :"+ message +"\r\n");
+        writer.flush( );
     }
     
     public void join(String channelName)throws IOException{

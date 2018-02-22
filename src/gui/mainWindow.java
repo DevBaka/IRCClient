@@ -24,7 +24,7 @@ import java.awt.event.ActionListener;
 
 
 
-public class mainWindow extends JFrame implements ActionListener{
+public class mainWindow implements ActionListener{
     
     private JTextField inputText;
     private JTextArea displayServers;
@@ -33,17 +33,21 @@ public class mainWindow extends JFrame implements ActionListener{
     private JMenuItem joinChannel;
     private JMenuItem NetzwerkListe;
     public JTextArea displayText;
+    private JFrame frame;
+    private gui.joinChannel ChannelDialog;
+    private gui.joinServer ServerDialog;
     
     public mainWindow() {
                 // JFrame / Root Frame
-        	super("IRC-Client");
-		this.setSize(800,600);
-		this.setLocation(50, 50);
-		this.setResizable(true);		
-		this.setLayout(new BorderLayout());
+                 frame = new JFrame("IRC Client");
+        	//super("IRC-Client");
+		frame.setSize(800,600);
+		frame.setLocation(50, 50);
+		frame.setResizable(true);		
+		frame.setLayout(new BorderLayout());
                 
                 // Um alle Prozesse nach dem schließen der GUI zu beenden.
-                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		
                 // Menübar
 		Border bo = new LineBorder(Color.yellow);
@@ -69,7 +73,7 @@ public class mainWindow extends JFrame implements ActionListener{
 		
 		navbar.add(mServer);
                 navbar.add(mNetzwerk);
-		this.setJMenuBar(navbar);
+		frame.setJMenuBar(navbar);
                 
                 
                 // Server 6 Channel Liste
@@ -122,32 +126,31 @@ public class mainWindow extends JFrame implements ActionListener{
                 
                 
                 // Add elements to JFrame / Root Frame
-                getContentPane().add(panelServers, BorderLayout.WEST);
-                getContentPane().add(panelUsers, BorderLayout.EAST);
-                getContentPane().add(panelText, BorderLayout.CENTER);
+                frame.getContentPane().add(panelServers, BorderLayout.WEST);
+                frame.getContentPane().add(panelUsers, BorderLayout.EAST);
+                frame.getContentPane().add(panelText, BorderLayout.CENTER);
                 //pack();
-                setLocationRelativeTo(null);
-		this.setVisible(true);
+                frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
     }
     
     public void actionPerformed(ActionEvent ae){
-        if(ae.getSource() == this.inputText){
-            String text =  this.inputText.getText();
+        if(ae.getSource() == this.cmdSendMessage){
+            String msg = inputText.getText();
+            //ServerDialog.send_Message(msg);
         }
         else if(ae.getSource() == this.joinServer){
-            gui.joinServer ServerDialog = new gui.joinServer();
+            ServerDialog = new gui.joinServer(this);
             System.out.println("sendmsg");
         }
         else if(ae.getSource() == this.joinChannel){
-            gui.joinChannel ChannelDialog = new gui.joinChannel();
+            ChannelDialog = new gui.joinChannel();
             
-        }
-        
-        
-    }
+            
+        }   
+    }    
     
-    public static void addText(String text){
-        //this.displayText.append(text);
+    public void addText(String line){
+        this.displayText.append(line + "\n");
     }
-    
 }
