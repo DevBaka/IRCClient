@@ -4,8 +4,6 @@ package gui;
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
-
-
 */
 
 /**
@@ -21,8 +19,13 @@ import javax.swing.border.LineBorder;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class mainWindow extends JFrame implements ActionListener{
+
+
+public class mainWindow implements ActionListener{
     
     private JTextField inputText;
     private JTextArea displayServers;
@@ -30,18 +33,23 @@ public class mainWindow extends JFrame implements ActionListener{
     private JMenuItem joinServer;
     private JMenuItem joinChannel;
     private JMenuItem NetzwerkListe;
-    private JTextArea displayText;
+    public JTextArea displayText;
+    //private JTextField inputText;
+    private JFrame frame;
+    private gui.joinChannel ChannelDialog;
+    private gui.joinServer ServerDialog;
     
     public mainWindow() {
                 // JFrame / Root Frame
-        	super("IRC-Client");
-		this.setSize(800,600);
-		this.setLocation(50, 50);
-		this.setResizable(true);		
-		this.setLayout(new BorderLayout());
+                 frame = new JFrame("IRC Client");
+        	//super("IRC-Client");
+		frame.setSize(800,600);
+		frame.setLocation(50, 50);
+		frame.setResizable(true);		
+		frame.setLayout(new BorderLayout());
                 
                 // Um alle Prozesse nach dem schließen der GUI zu beenden.
-                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		
                 // Menübar
 		Border bo = new LineBorder(Color.yellow);
@@ -67,7 +75,7 @@ public class mainWindow extends JFrame implements ActionListener{
 		
 		navbar.add(mServer);
                 navbar.add(mNetzwerk);
-		this.setJMenuBar(navbar);
+		frame.setJMenuBar(navbar);
                 
                 
                 // Server 6 Channel Liste
@@ -99,52 +107,60 @@ public class mainWindow extends JFrame implements ActionListener{
                 // Text box & Eingabe / Center / content
                 JPanel panelText = new JPanel();
                 JPanel panelSendMessage = new JPanel(new FlowLayout());
+                
                 panelText.setLayout(new BorderLayout());
                 panelText.setBackground(Color.blue);
                 displayText = new JTextArea(28,37);
                 displayText.setEditable(false);
+                
                 JScrollPane scrollText = new JScrollPane(displayText);
                 scrollText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-                JTextField inputText = new JTextField(20);
+                inputText = new JTextField(20);
+                inputText.setEditable(true);
                 inputText.addActionListener(this);
                 cmdSendMessage = new JButton("Send");
                 cmdSendMessage.addActionListener(this);
                 
                 panelSendMessage.add(inputText);
                 panelSendMessage.add(cmdSendMessage);
-                panelText.add(displayText, BorderLayout.CENTER);
+                panelText.add(scrollText, BorderLayout.CENTER);
                 panelText.add(panelSendMessage, BorderLayout.SOUTH);
                 //panelText.add(inputText, BorderLayout.SOUTH);
                 //panelText.add(cmdSendMessage, BorderLayout.SOUTH);
                 
                 
                 // Add elements to JFrame / Root Frame
-                getContentPane().add(panelServers, BorderLayout.WEST);
-                getContentPane().add(panelUsers, BorderLayout.EAST);
-                getContentPane().add(panelText, BorderLayout.CENTER);
+                frame.getContentPane().add(panelServers, BorderLayout.WEST);
+                frame.getContentPane().add(panelUsers, BorderLayout.EAST);
+                frame.getContentPane().add(panelText, BorderLayout.CENTER);
                 //pack();
-                setLocationRelativeTo(null);
-		this.setVisible(true);
+                frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
     }
     
     public void actionPerformed(ActionEvent ae){
-        if(ae.getSource() == this.inputText){
-            String text =  this.inputText.getText();
+        if(ae.getSource() == this.cmdSendMessage){
+            String msg = inputText.getText();
+            System.out.println("Send this message: " + msg);
+            try {
+                ServerDialog.send_Message(msg);
+                //ServerDialog.send_Message(msg);
+            } catch (IOException ex) {
+                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if(ae.getSource() == this.joinServer){
-            gui.joinServer ServerDialog = new gui.joinServer();
+            ServerDialog = new gui.joinServer(this);
             System.out.println("sendmsg");
         }
         else if(ae.getSource() == this.joinChannel){
-            gui.joinChannel ChannelDialog = new gui.joinChannel();
+            ChannelDialog = new gui.joinChannel();
             
-        }
-        
-        
-    }
+            
+        }   
+    }    
     
-    public void addText(String text){
-        this.displayText.append(text);
+    public void addText(String line){
+        this.displayText.append(line + "\n");
     }
-    
 }
