@@ -46,4 +46,9 @@ public class irc {
         this.window.addText(this.UserName + " " + Message);
     }
     
+    public void irc_getAllChannel() throws IOException{
+        writer.write("LIST -min 5" + "\r\n");
+        writer.flush();
+    }
+    
 }
