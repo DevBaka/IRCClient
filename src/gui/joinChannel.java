@@ -43,8 +43,7 @@ public class joinChannel implements ActionListener{
         joinChannel.add(lblEnter);
         joinChannel.add(cmdTestconnect);
         joinChannel.pack();
-        joinChannel.setVisible(true);
-        
+        joinChannel.setVisible(true);   
     }
     
      public void actionPerformed(ActionEvent ae){
