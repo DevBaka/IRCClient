@@ -5,6 +5,7 @@
  */
 package irc;
 
+import gui.channelList;
 import gui.mainWindow;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

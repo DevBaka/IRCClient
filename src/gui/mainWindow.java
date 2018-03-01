@@ -32,6 +32,7 @@ public class mainWindow implements ActionListener{
     private JButton cmdSendMessage;
     private JMenuItem joinServer;
     private JMenuItem joinChannel;
+    private JMenuItem channelListe;
     private JMenuItem NetzwerkListe;
     public JTextArea displayText;
     //private JTextField inputText;
@@ -41,7 +42,7 @@ public class mainWindow implements ActionListener{
     
     public mainWindow() {
                 // JFrame / Root Frame
-                 frame = new JFrame("IRC Client");
+                frame = new JFrame("IRC Client");
         	//super("IRC-Client");
 		frame.setSize(800,600);
 		frame.setLocation(50, 50);
@@ -70,9 +71,13 @@ public class mainWindow implements ActionListener{
 		joinChannel = new JMenuItem("Join Channel");
                 joinChannel.addActionListener(this);
                 
+                channelListe = new JMenuItem("Channel Liste");
+                channelListe.addActionListener(this);
+                
+                
 		mServer.add(joinServer);
                 mServer.add(joinChannel);
-		
+		mServer.add(channelListe);
 		navbar.add(mServer);
                 navbar.add(mNetzwerk);
 		frame.setJMenuBar(navbar);
@@ -158,6 +163,13 @@ public class mainWindow implements ActionListener{
             
             
         }   
+        else if(ae.getSource() == this.channelListe){
+            try {
+                gui.channelList listChannels = new gui.channelList();
+            } catch (IOException ex) {
+                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }    
     
     public void addText(String line){

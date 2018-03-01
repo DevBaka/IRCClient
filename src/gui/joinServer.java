@@ -101,7 +101,7 @@ public class joinServer implements ActionListener{
      
      public void send_Message(String message) throws IOException{
          this.irc.irc_sendMessage(message);
-         this.irc.irc_getAllChannel();
+         //this.irc.irc_getAllChannel();
         /* try{
             this.irc.send_message(message);
          }
