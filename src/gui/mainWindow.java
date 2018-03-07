@@ -88,7 +88,7 @@ public class mainWindow implements ActionListener{
                 JPanel panelServers = new JPanel();
                 panelServers.setBackground(Color.red);
                 // add TextArea
-                JTextArea displayServers = new JTextArea(33,15);
+                displayServers = new JTextArea(33,15);
                 displayServers.setEditable(false);
                 // add ScrollPane to TextArea
                 JScrollPane scrollServers = new JScrollPane(displayServers); 
@@ -175,4 +175,14 @@ public class mainWindow implements ActionListener{
     public void addText(String line){
         this.displayText.append(line + "\n");
     }
+    
+    public void addServer(String line, String line2){
+        this.displayServers.append(line + "\n     " + line2 +"\n" );
+    }
+    
+    public void addChannel(String Server, String Channel){
+        String txtServers = this.displayServers.getText();
+        
+    }
+    
 }

@@ -6,6 +6,7 @@
 package gui;
 
 import irc.irc;
+import irc.irc_getChannels;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +25,7 @@ import javax.swing.JTextArea;
  */
 
 public class channelList implements ActionListener{
-    private irc irc;
+    private irc_getChannels irc;
     private JButton cmdAllChannels;
     private JTextArea txtChannels;
     private JScrollPane txtScrollChannels;
@@ -56,12 +57,22 @@ public class channelList implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.cmdAllChannels ){
             try {
+                //irc.irc_test();
+                irc.getChannels();
+                
+                /*
+                try {
                 System.out.println("get channels:");
-                this.irc.irc_getAllChannel();
-            } catch (IOException ex) {
+                //this.irc.irc_getAllChannel();
+                this.irc.irc_test();
+                } catch (IOException ex) {
                 System.out.println("channelList error: " + ex);
                 Logger.getLogger(channelList.class.getName()).log(Level.SEVERE, null, ex);
+                }*/
+            } catch (IOException ex) {
+                Logger.getLogger(channelList.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         } 
     }
 }
