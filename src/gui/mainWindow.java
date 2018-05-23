@@ -21,6 +21,9 @@ import javax.swing.border.LineBorder;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -34,6 +37,7 @@ public class mainWindow implements ActionListener{
     private JMenuItem NetzwerkListe;
     public JTextArea displayText;
     private JFrame frame;
+    public irc.irc irc;
     private gui.joinChannel ChannelDialog;
     private gui.joinServer ServerDialog;
     
@@ -50,7 +54,7 @@ public class mainWindow implements ActionListener{
                 frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		
                 // Menübar
-		Border bo = new LineBorder(Color.yellow);
+		Border bo = new LineBorder(Color.black);
 		JMenuBar navbar = new JMenuBar();
 		navbar.setBorder(bo);
 		
@@ -79,7 +83,7 @@ public class mainWindow implements ActionListener{
                 // Server 6 Channel Liste
                 // add Panel
                 JPanel panelServers = new JPanel();
-                panelServers.setBackground(Color.red);
+                panelServers.setBackground(Color.black);
                 // add TextArea
                 JTextArea displayServers = new JTextArea(33,15);
                 displayServers.setEditable(false);
@@ -92,7 +96,7 @@ public class mainWindow implements ActionListener{
                 
                 // Users Liste
                 JPanel panelUsers = new JPanel();
-                panelUsers.setBackground(Color.red);
+                panelUsers.setBackground(Color.black);
                 JTextArea displayUsers = new JTextArea(33,15);
                 // min hight für dynamisches layout:
                 //JTextArea displayUsers = new JTextArea();
@@ -107,12 +111,13 @@ public class mainWindow implements ActionListener{
                 JPanel panelSendMessage = new JPanel(new FlowLayout());
                 panelText.setLayout(new BorderLayout());
                 panelText.setBackground(Color.blue);
+                panelSendMessage.setBackground(Color.black);
                 displayText = new JTextArea(28,37);
                 displayText.setEditable(false);
                 
                 JScrollPane scrollText = new JScrollPane(displayText);
                 scrollText.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-                JTextField inputText = new JTextField(20);
+                inputText = new JTextField(20);
                 inputText.addActionListener(this);
                 cmdSendMessage = new JButton("Send");
                 cmdSendMessage.addActionListener(this);
@@ -136,8 +141,16 @@ public class mainWindow implements ActionListener{
     
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == this.cmdSendMessage){
-            String msg = inputText.getText();
-            //ServerDialog.send_Message(msg);
+            String msg = this.inputText.getText();
+            System.out.println("msgWindow: " + msg);
+            try {
+                this.irc.irc_sendMessage(msg);
+                this.displayText.append(this.irc.Username + ":" + this.irc.ChannelName + " :" + msg + "\r\n");
+                //this.displayText.append(msg + "\n");
+
+            } catch (IOException ex) {
+                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if(ae.getSource() == this.joinServer){
             ServerDialog = new gui.joinServer(this);

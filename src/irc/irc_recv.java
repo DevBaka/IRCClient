@@ -34,7 +34,8 @@ public class irc_recv implements Runnable{
         this.ircSocket = this.irc.ircSocket;
         this.writer = this.irc.writer;
         this.reader = this.irc.reader;
-        
+        this.mW = window;
+        this.mW.irc = this.irc;
         this.start();
     }
     
@@ -73,7 +74,8 @@ public class irc_recv implements Runnable{
                     //Class<gui.mainWindow> mW;
                     //Class mW = gui.mainWindow.;
                     //mW.getMethod("addText", null);
-                    mW.addText(line);
+                    //mW.addText(line);
+                    mW.displayText.append(line + "\n");
                 }
 
                 /*if(this.newChannel != null){

@@ -22,11 +22,13 @@ public class irc {
     Socket ircSocket;
     BufferedWriter writer;
     BufferedReader reader;
-    String ChannelName;
+    public String Username;
+    public String ChannelName;
     mainWindow window;
     
     public irc(String ServerName, int ServerPort, String ChannelName, String Username, mainWindow win) throws IOException{
         this.irc = new irc_conn(ServerName, ServerPort, ChannelName, Username);
+        this.Username = Username;
         this.ircSocket = this.irc.ircSocket;
         this.writer = this.irc.writer;
         this.reader = this.irc.reader;
